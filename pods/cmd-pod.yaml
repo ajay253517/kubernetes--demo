@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: command-pod
+spec:
+  containers:
+  - name: comm
+    image: alpine:3.10
+    command: [/bin/cat]
+    args: [/etc/os-release]
+  restartPolicy: Never

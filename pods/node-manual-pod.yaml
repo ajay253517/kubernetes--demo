@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: node-pod
+
+spec:
+  containers: 
+  - name: web-pod
+    image: ajaypb1122/py-gen:v1
+    ports:
+    - containerPort: 80
+  nodeName: ip-172-31-16-36.ap-south-1.compute.internal

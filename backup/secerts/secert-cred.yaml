@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: secert
+metadata:
+  name: db-secert
+type: Opaque
+data:
+  username: ZGJ1c2Vy
+  password: cm9vdEAxMjM0

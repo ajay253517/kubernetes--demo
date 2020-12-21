@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: static-user-site
+  labels: 
+    web: static-site-user
+  namespace: userdefinedspace
+
+spec:
+  replicas: 5
+  selector:
+    matchLabels: 
+      component: static-site-user
+
+  template:
+    metadata:
+      labels:
+        component: static-site-user
+      
+    spec:
+      containers:
+        - name: static-site-pod
+          image: ajaypb1122/static-site:latest
+          ports:
+            - containerPort: 80

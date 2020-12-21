@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: comm-mul-env
+spec:
+  containers:
+  - name: comm-mul-env
+    image:  ajaypb1122/env-test:v1
+    command: [ "/bin/sh", "-c", "env" ]
+    envFrom:
+    - secretRef:
+        name: db-user
+    - secretRef:
+        name: app-user-cred
+  restartPolicy: Never

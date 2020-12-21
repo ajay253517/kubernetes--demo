@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: node-app-helloworld-dev
+  labels:
+    environment: dev
+    app: node-app
+
+  
+spec:
+  containers:
+    - name: node-app
+      image: ajaypb1122/node-app-dev:latest
+      ports:
+        - containerPort: 300

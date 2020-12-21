@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: static-site
+
+spec:
+  replicas: 5
+  minReadySeconds: 20
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  selector:
+    matchLabels: 
+      component: static-site
+
+  template:
+    metadata:
+      labels:
+        component: static-site
+      
+    spec:
+      containers:
+        - name: static-site-pod
+          image: ajaypb1122/static-site:v2
+          ports:
+            - containerPort: 80

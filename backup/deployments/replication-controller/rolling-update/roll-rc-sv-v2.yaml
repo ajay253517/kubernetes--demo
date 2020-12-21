@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: rc-roll-v1
+
+spec:
+  replicas: 5
+  selector:
+    app: node-app
+    name: rc-roll-v1
+  template:
+    metadata:
+      labels: 
+        app: node-app
+        name: rc-roll-v1
+    spec:
+      containers:
+      - name: rc-roll-v1
+        image: ajaypb1122/node-app-prod:v2
+        ports:
+        - name: noderc-port
+          containerPort: 3000

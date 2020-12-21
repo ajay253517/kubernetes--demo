@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: py-gen
+  labels:
+    app: py-app
+spec:
+  containers:
+  - name: py-gen
+    image: ajaypb1122/py-gen:v1
+    imagePullPolicy: Always
+    ports:
+    - containerPort: 5000

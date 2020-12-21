@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy-secerts
+spec:
+  replicas: 2
+  selector:
+    matchLabels: 
+      app: app-secert
+  template:
+    metadata:
+      labels:
+        app: app-secert
+    spec:
+      containers:
+      - name: deploy-secert
+        image: ajaypb1122/static-site:v1
+        ports:
+        - name: app-port
+          containerPort: 80
+        volumeMounts:
+        - name: cred-volume
+          mountPath: /etc/  
+          readOnly: true
+      volumes:
+      - name: cred-volume
+        secret:
+          secretName: app-cred

@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: comm-env
+spec:
+  containers:
+  - name: comm-env
+    image:  ajaypb1122/env-test:v1
+    envFrom:
+    - secretRef:
+        name: db-user
+  restartPolicy: Never

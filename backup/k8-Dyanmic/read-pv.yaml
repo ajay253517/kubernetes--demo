@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-read
+spec:
+  containers:
+  - name: centos-pod-readpv
+    image: centos:7
+    command: ["/bin/sh"]
+    args: ["-c", "while true; do cat /data/index.html; sleep 10; done"]
+    volumeMounts:
+    - name: readvol
+      mountPath: /data
+  
+  nodeSelector:
+      hostname: node1
+  
+  volumes:
+  - name: readvol
+    persistentVolumeClaim:
+      claimName: my-claim

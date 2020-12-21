@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: static-site
+
+spec:
+  containers:
+  - name: static-site-pod
+    image: ajaypb1122/static-site:v2
+    ports:
+    - containerPort: 80
+    volumeMounts:
+    - name: html-files
+      mountPath: /var/www/html/
+      
+  volumes:
+  - name: html-files
+    persistentVolumeClaim:
+      claimName: my-claim

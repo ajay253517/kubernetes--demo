@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: wp-sec-demo
+  labels:
+    app: wp-sec-novol
+
+
+spec:
+  containers:
+  - name: mysql-db
+    image: mysql:5.7
+    ports:
+      - name: db-port 
+        containerPort: 3306
+    env:
+    - name: MYSQL_ROOT_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: wp-sec
+          key: db-password
+    volumeMounts:
+    - mountPath: "/var/db/mysql/"
+      name: mypd
+  volumes: 
+  - name: mypd
+    persistentVolumeClaim: 
+      claimName: myclaim-1   
+                

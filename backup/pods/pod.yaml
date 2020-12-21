@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: static-site
+  labels:
+    web: static-site
+spec:
+ containers:
+ - name: static-site
+   image: ajaypb1122/static-site:latest
+   ports:
+    - containerPort: 80

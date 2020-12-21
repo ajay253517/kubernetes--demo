@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-pri
+spec:
+  containers:
+  - name: pod-pri
+    image: registry.gitlab.com/ajay253517/docker:v1
+  imagePullSecrets: 
+  - name: myregistrykey

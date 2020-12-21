@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nodeaffinity
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nodeaffinity
+  template: 
+    metadata: 
+      labels:
+        app: nodeaffinity
+    spec:
+      affinity: 
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: env
+                operator: In
+                values: 
+                - dev
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 1
+            preference: 
+              matchExpressions:
+              - key: team
+                operator: In
+                values:
+                - eng-project1
+      containers:
+      - name: node-app-affinty
+        image: ajaypb1122/node-app-prod:latest
+        ports:
+        - name: app-port
+          containerPort: 3000
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: node-app
+spec:
+  selector:
+    app: node-affinity 
+  type: NodePort
+  ports:
+  - name:  name-of-the-port
+    port:  3000
+    nodePort:  32001

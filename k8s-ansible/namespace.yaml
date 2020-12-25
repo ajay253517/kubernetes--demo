@@ -1,0 +1,8 @@
+- hosts: localhost
+  tasks:
+    - name: Creating namespace
+      k8s:
+        name: ansible
+        apiVersion: v1
+        kind: Namesapce
+        state: present 

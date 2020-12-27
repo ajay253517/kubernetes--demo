@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: private-dep
+spec:
+  replicas: 3
+  selector:
+    matchLabels: 
+      app: py-sec
+  template:
+    metadata:
+      labels:
+        app: py-sec
+    spec:
+      containers:
+      - name: private-container
+        image: registry.gitlab.com/ajay253517/ci_cd_repo:v1
+        ports:
+        - name: app-port
+          containerPort: 8080
+      imagePullSecrets: 
+        - name: gitlab-sec
+        
+---
+apiVersion: v1
+kind: Service
+metadata: 
+  name: py-gen
+spec:
+  selector:
+    app: py-sec
+  type: ClusterIP
+  ports:
+    - name: py-sec-port
+      port: 8080

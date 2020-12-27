@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment 
+metadata: 
+  name: py-app
+  labels:
+    app: node
+spec:
+  replicas: 2
+  minReadySeconds: 20
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels: 
+      name: py-app
+
+  template:
+    metadata:
+      labels:
+        name: py-app
+      
+    spec:
+      containers:
+        - name: node-app-pod
+          image: ajaypb1122/node-dev:v2
+          ports:
+            - containerPort: 3000
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: py-gen-svc
+spec:
+  selector:
+    name: py-app
+  type: NodePort 
+  ports:
+  - name: app-port
+    port:  3000
+    nodePort: 30050
+    protocol: TCP

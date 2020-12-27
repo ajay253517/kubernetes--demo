@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: db-user-pass
+type: Opaque
+data:
+  username: cm9vdA==
+  password: cGFzc3dvcmQ= 
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy-secerts
+spec:
+  replicas: 3
+  selector:
+    matchLabels: 
+      app: app-secert
+  template:
+    metadata:
+      labels:
+        app: app-secert
+    spec:
+      containers:
+      - name: deploy-secert
+        image: ajaypb1122/flask-web:v2
+        ports:
+        - name: app-port
+          containerPort: 3000
+        env:
+          - name: SECRET_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: db-user-pass
+                key: username
+          - name: SECRET_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: db-user-pass
+                key: password

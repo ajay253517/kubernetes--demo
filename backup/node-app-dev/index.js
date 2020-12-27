@@ -2,7 +2,7 @@ var express = require('express');
 var app = express ();
 
 app.get ('/', function (req, res){
-	res.send('Welcome to node app Running in k8-Prod ');
+	res.send('Welcome to node app Running in k8-Prod v1 ');
 });
 
 
